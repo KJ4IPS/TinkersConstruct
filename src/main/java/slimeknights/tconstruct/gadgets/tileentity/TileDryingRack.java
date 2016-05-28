@@ -80,10 +80,11 @@ public class TileDryingRack extends TileItemRack implements ITickable, ISidedInv
   }
 
   @Override
-  public void writeToNBT(NBTTagCompound tags) {
+  public NBTTagCompound writeToNBT(NBTTagCompound tags) {
     tags.setInteger("Time", currentTime);
     tags.setInteger("MaxTime", maxTime);
     super.writeToNBT(tags);
+    return tags;
   }
 
   @Override

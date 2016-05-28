@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.IReloadableResourceManager;
@@ -28,7 +28,7 @@ import slimeknights.tconstruct.library.client.CustomTextureCreator;
 import slimeknights.tconstruct.library.client.model.MaterialModelLoader;
 import slimeknights.tconstruct.library.client.model.ModifierModelLoader;
 import slimeknights.tconstruct.library.client.model.ToolModelLoader;
-import slimeknights.tconstruct.library.client.particle.EntitySlimeFx;
+import slimeknights.tconstruct.library.client.particle.ParticleEntitySlime;
 import slimeknights.tconstruct.library.client.particle.Particles;
 import slimeknights.tconstruct.library.client.texture.AbstractColoredTexture;
 import slimeknights.tconstruct.library.modifiers.IModifier;
@@ -242,7 +242,7 @@ public abstract class ClientProxy extends CommonProxy {
 
   @Override
   public void spawnParticle(Particles particleType, World world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int... data) {
-    EntityFX effect = createParticle(particleType, world, x,y,z, xSpeed,ySpeed,zSpeed, data);
+    Particle effect = createParticle(particleType, world, x,y,z, xSpeed,ySpeed,zSpeed, data);
     Minecraft.getMinecraft().effectRenderer.addEffect(effect);
 
     if(particleType == Particles.EFFECT && data[0] > 1) {
@@ -255,14 +255,14 @@ public abstract class ClientProxy extends CommonProxy {
 
   @Override
   public void spawnSlimeParticle(World world, double x, double y, double z) {
-    Minecraft.getMinecraft().effectRenderer.addEffect(new EntitySlimeFx(world, x,y,z, TinkerCommons.matSlimeBallBlue.getItem(), TinkerCommons.matSlimeBallBlue.getItemDamage()));
+    Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleEntitySlime(world, x,y,z, TinkerCommons.matSlimeBallBlue.getItem(), TinkerCommons.matSlimeBallBlue.getItemDamage()));
   }
 
-  public static EntityFX createParticle(Particles type, World world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int... data) {
+  public static Particle createParticle(Particles type, World world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int... data) {
     switch(type) {
       // entities
       case BLUE_SLIME:
-        return new EntitySlimeFx(world, x, y, z, TinkerCommons.matSlimeBallBlue.getItem(), TinkerCommons.matSlimeBallBlue.getItemDamage());
+        return new ParticleEntitySlime(world, x, y, z, TinkerCommons.matSlimeBallBlue.getItem(), TinkerCommons.matSlimeBallBlue.getItemDamage());
       // attack
       case CLEAVER_ATTACK:
         return new ParticleAttackCleaver(world, x, y, z, xSpeed, ySpeed, zSpeed, Minecraft.getMinecraft().getTextureManager());

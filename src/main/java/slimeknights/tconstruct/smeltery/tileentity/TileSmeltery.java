@@ -610,7 +610,7 @@ public class TileSmeltery extends TileHeatingStructure implements IMasterLogic, 
   }
 
   @Override
-  public void writeToNBT(NBTTagCompound compound) {
+  public NBTTagCompound writeToNBT(NBTTagCompound compound) {
     super.writeToNBT(compound);
     liquids.writeToNBT(compound);
 
@@ -631,6 +631,8 @@ public class TileSmeltery extends TileHeatingStructure implements IMasterLogic, 
     compound.setTag("minPos", TagUtil.writePos(minPos));
     compound.setTag("maxPos", TagUtil.writePos(maxPos));
     compound.setTag("insidePos", TagUtil.writePos(insideCheck));
+
+    return compound;
   }
 
   @Override

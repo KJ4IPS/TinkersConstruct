@@ -12,10 +12,10 @@ public class TileSmelteryComponent extends MultiServantLogic {
 
   // we send all our info to the client on load
   @Override
-  public Packet getDescriptionPacket() {
+  public NBTTagCompound getUpdateTag() {
     NBTTagCompound tag = new NBTTagCompound();
     writeToNBT(tag);
-    return new SPacketUpdateTileEntity(this.getPos(), this.getBlockMetadata(), tag);
+    return tag;
   }
 
   @Override

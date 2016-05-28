@@ -311,7 +311,7 @@ public abstract class TileCasting extends TileTable implements ITickable, ISided
   /* Saving and Loading */
 
   @Override
-  public void writeToNBT(NBTTagCompound tags) {
+  public NBTTagCompound writeToNBT(NBTTagCompound tags) {
     super.writeToNBT(tags);
 
     NBTTagCompound tankTag = new NBTTagCompound();
@@ -319,6 +319,7 @@ public abstract class TileCasting extends TileTable implements ITickable, ISided
     tags.setTag("tank", tankTag);
 
     tags.setInteger("timer", timer);
+    return tags;
   }
 
   @Override

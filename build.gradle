@@ -30,6 +30,7 @@ plugins {
 }*/
 
 repositories {
+    mavenLocal()
     maven {
         name 'CB Maven FS'
         url "http://chickenbones.net/maven/"
