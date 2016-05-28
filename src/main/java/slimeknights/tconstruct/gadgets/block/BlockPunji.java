@@ -127,12 +127,13 @@ public class BlockPunji extends Block {
   }
 
   @Override
-  public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock) {
-    EnumFacing facing = state.getValue(FACING);
+  public void onNeighborChange(IBlockAccess iBlockAccess, BlockPos pos, BlockPos neighborBlock) {
+    World worldIn = (World) iBlockAccess;
+    EnumFacing facing = worldIn.getBlockState(pos).getValue(FACING);
 
     if (!worldIn.isSideSolid(pos.offset(facing), facing.getOpposite(), true))
     {
-      this.dropBlockAsItem(worldIn, pos, state, 0);
+      this.dropBlockAsItem(worldIn, pos, worldIn.getBlockState(pos), 0);
       worldIn.setBlockToAir(pos);
     }
   }

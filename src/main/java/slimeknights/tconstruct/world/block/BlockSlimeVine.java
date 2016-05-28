@@ -50,7 +50,8 @@ public class BlockSlimeVine extends BlockVine {
   }
 
   @Override
-  public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock) {
+  public void onNeighborChange(IBlockAccess iBlockAccess, BlockPos pos, BlockPos neighborBlock) {
+    World worldIn = (World) iBlockAccess;
     if(worldIn.isRemote) {
       return;
     }
@@ -59,7 +60,7 @@ public class BlockSlimeVine extends BlockVine {
     if(!canAttachTo(worldIn, pos.north()) && !canAttachTo(worldIn, pos.east()) && !canAttachTo(worldIn, pos.south()) && !canAttachTo(worldIn, pos.west())) {
       // are we held up from above?
       if(!(worldIn.getBlockState(pos.up()).getBlock() instanceof BlockVine)) {
-        this.dropBlockAsItem(worldIn, pos, state, 0);
+        this.dropBlockAsItem(worldIn, pos, worldIn.getBlockState(pos), 0);
         worldIn.setBlockToAir(pos);
       }
     }

@@ -656,10 +656,10 @@ public class TileSmeltery extends TileHeatingStructure implements IMasterLogic, 
   }
 
   @Override
-  public Packet getDescriptionPacket() {
+  public NBTTagCompound getUpdateTag() {
     NBTTagCompound tag = new NBTTagCompound();
     writeToNBT(tag);
-    return new SPacketUpdateTileEntity(this.getPos(), this.getBlockMetadata(), tag);
+    return tag;
   }
 
   @Override

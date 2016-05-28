@@ -374,7 +374,7 @@ public final class ToolHelper {
       // the code above, executed on the server, sends a block-updates that give us the correct state of the block we destroy.
 
       // following code can be found in PlayerControllerMP.onPlayerDestroyBlock
-      world.playAuxSFX(2001, pos, Block.getStateId(state));
+      world.playEvent(2001, pos, Block.getStateId(state));
       if(block.removedByPlayer(state, world, pos, player, true))
       {
         block.onBlockDestroyedByPlayer(world, pos, state);

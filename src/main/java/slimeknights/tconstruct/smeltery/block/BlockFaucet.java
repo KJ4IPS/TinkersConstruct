@@ -98,7 +98,8 @@ public class BlockFaucet extends BlockContainer {
   }
 
   @Override
-  public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock) {
+  public void onNeighborChange(IBlockAccess iblockAccess, BlockPos pos, BlockPos neighborBlock) {
+    World worldIn = (World) iblockAccess;
     if(worldIn.isRemote) {
       return;
     }
