@@ -334,7 +334,7 @@ public final class ToolHelper {
 
       // send update to client
       if (!world.isRemote) {
-        ((EntityPlayerMP)player).playerNetServerHandler.sendPacket(new SPacketBlockChange(world, pos));
+        ((EntityPlayerMP)player).connection.sendPacket(new SPacketBlockChange(world, pos));
       }
       return;
     }
@@ -365,7 +365,7 @@ public final class ToolHelper {
 
       // always send block update to client
       EntityPlayerMP mpPlayer = (EntityPlayerMP) player;
-      mpPlayer.playerNetServerHandler.sendPacket(new SPacketBlockChange(world, pos));
+      mpPlayer.connection.sendPacket(new SPacketBlockChange(world, pos));
     }
     // client sided handling
     else {
@@ -390,7 +390,7 @@ public final class ToolHelper {
 
       // send an update to the server, so we get an update back
       //if(PHConstruct.extraBlockUpdates)
-      Minecraft.getMinecraft().getNetHandler().addToSendQueue(new CPacketPlayerDigging(CPacketPlayerDigging.Action.STOP_DESTROY_BLOCK, pos, Minecraft
+      Minecraft.getMinecraft().getConnection().sendPacket(new CPacketPlayerDigging(CPacketPlayerDigging.Action.STOP_DESTROY_BLOCK, pos, Minecraft
           .getMinecraft().objectMouseOver.sideHit));
     }
   }
@@ -638,7 +638,7 @@ public final class ToolHelper {
       // I guess this is to allow better handling at the hit players side? No idea why it resets the motion though.
       if (targetEntity instanceof EntityPlayerMP && targetEntity.velocityChanged)
       {
-        ((EntityPlayerMP)targetEntity).playerNetServerHandler.sendPacket(new SPacketEntityVelocity(targetEntity));
+        ((EntityPlayerMP)targetEntity).connection.sendPacket(new SPacketEntityVelocity(targetEntity));
         targetEntity.velocityChanged = false;
         targetEntity.motionX = oldVelX;
         targetEntity.motionY = oldVelY;

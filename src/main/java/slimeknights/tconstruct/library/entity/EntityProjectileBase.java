@@ -58,7 +58,7 @@ public abstract class EntityProjectileBase extends EntityArrow implements IEntit
 
     this.shootingEntity = player;
 
-    canBePickedUp = player.isCreative() ? PickupStatus.CREATIVE_ONLY : PickupStatus.ALLOWED;
+    pickupStatus = player.isCreative() ? PickupStatus.CREATIVE_ONLY : PickupStatus.ALLOWED;
 
     // stuff from the arrow
     this.setLocationAndAngles(player.posX, player.posY + (double) player.getEyeHeight(), player.posZ, player.rotationYaw, player.rotationPitch);
@@ -378,7 +378,7 @@ public abstract class EntityProjectileBase extends EntityArrow implements IEntit
     //else
     //newPos = Vec3d.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
-    Entity entity = this.func_184551_a(oldPos, newPos);
+    Entity entity = this.findEntityOnPath(oldPos, newPos);
 
     // if we hit something, new collision point!
     if(entity != null) {
@@ -447,11 +447,11 @@ public abstract class EntityProjectileBase extends EntityArrow implements IEntit
   }
 
   @Override
-  protected Entity func_184551_a(Vec3d p_184551_1_, Vec3d p_184551_2_) {
+  protected Entity findEntityOnPath(Vec3d p_184551_1_, Vec3d p_184551_2_) {
     if(isDefused()) {
       return null;
     }
-    return super.func_184551_a(p_184551_1_, p_184551_2_);
+    return super.findEntityOnPath(p_184551_1_, p_184551_2_);
   }
 
   public void drawCritParticles() {
@@ -509,10 +509,10 @@ public abstract class EntityProjectileBase extends EntityArrow implements IEntit
   @Override
   public void onCollideWithPlayer(EntityPlayer player) {
     if(!this.worldObj.isRemote && this.inGround && this.arrowShake <= 0) {
-      boolean pickedUp = this.canBePickedUp == EntityArrow.PickupStatus.ALLOWED || this.canBePickedUp == EntityArrow.PickupStatus.CREATIVE_ONLY && player.capabilities.isCreativeMode;
+      boolean pickedUp = this.pickupStatus == EntityArrow.PickupStatus.ALLOWED || this.pickupStatus == EntityArrow.PickupStatus.CREATIVE_ONLY && player.capabilities.isCreativeMode;
 
       if(pickedUp) {
-        pickedUp = tinkerProjectile.pickup(player, canBePickedUp != PickupStatus.ALLOWED);
+        pickedUp = tinkerProjectile.pickup(player, pickupStatus != PickupStatus.ALLOWED);
       }
 
       if(pickedUp) {
