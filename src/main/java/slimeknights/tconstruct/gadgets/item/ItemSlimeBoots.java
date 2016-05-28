@@ -18,7 +18,7 @@ import slimeknights.tconstruct.library.Util;
 
 public class ItemSlimeBoots extends ItemArmor {
 
-  public static ArmorMaterial SLIME_MATERIAL = EnumHelper.addArmorMaterial("SLIME", Util.resource("slime"), 0, new int[]{0, 0, 0, 0}, 0, SoundEvents.BLOCK_SLIME_PLACE);
+  public static ArmorMaterial SLIME_MATERIAL = EnumHelper.addArmorMaterial("SLIME","slime",0,new int[]{0,0,0,0},0,SoundEvents.BLOCK_SLIME_PLACE,0);
 
   public ItemSlimeBoots() {
     super(SLIME_MATERIAL, 0, EntityEquipmentSlot.FEET);

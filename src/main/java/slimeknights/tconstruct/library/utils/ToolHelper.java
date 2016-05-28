@@ -526,7 +526,7 @@ public final class ToolHelper {
    */
   public static boolean attackEntity(ItemStack stack, ToolCore tool, EntityLivingBase attacker, Entity targetEntity, boolean isProjectile) {
     // nothing to do, no target?
-    if(targetEntity == null || !targetEntity.canAttackWithItem() || targetEntity.hitByEntity(attacker) || !stack.hasTagCompound()) {
+    if(targetEntity == null || !targetEntity.canBeAttackedWithItem() || targetEntity.hitByEntity(attacker) || !stack.hasTagCompound()) {
       return false;
     }
     if(!(targetEntity instanceof EntityLivingBase)) {

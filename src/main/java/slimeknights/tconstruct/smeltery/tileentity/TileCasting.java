@@ -117,7 +117,7 @@ public abstract class TileCasting extends TileTable implements ITickable, ISided
 
             for(EntityPlayer player : worldObj.playerEntities) {
               if(player.getDistanceSq(pos) < 1024 && player instanceof EntityPlayerMP) {
-                ((EntityPlayerMP) player).playerNetServerHandler.sendPacket(new SPacketParticles(EnumParticleTypes.FLAME, false,
+                ((EntityPlayerMP) player).connection.sendPacket(new SPacketParticles(EnumParticleTypes.FLAME, false,
                                                                                                  pos.getX() + 0.5f,
                                                                                                  pos.getY() + 1.1f,
                                                                                                  pos.getZ() + 0.5f,
